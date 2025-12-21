@@ -142,8 +142,22 @@
     function onClick(event) {
       if (shouldTransition) return;
 
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      let clientX, clientY;
+      
+      // Handle both mouse and touch events
+      if (event.touches) {
+        clientX = event.touches[0].clientX;
+        clientY = event.touches[0].clientY;
+      } else if (event.changedTouches) {
+        clientX = event.changedTouches[0].clientX;
+        clientY = event.changedTouches[0].clientY;
+      } else {
+        clientX = event.clientX;
+        clientY = event.clientY;
+      }
+
+      mouse.x = (clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(clientY / window.innerHeight) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects([boxBody, lid]);
@@ -271,7 +285,7 @@
 
     // Events
     window.addEventListener('click', onClick);
-    window.addEventListener('touchend', onClick);
+    window.addEventListener('touchstart', onClick, { passive: false });
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
