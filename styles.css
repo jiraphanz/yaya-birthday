@@ -1,0 +1,118 @@
+/* Mobile-first styles for birthday surprise page */
+:root{
+  --bg1:#ff9a9e;
+  --bg2:#fad0c4;
+  --card:#ffffffee;
+  --accent:#ff6b81;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Kanit', system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans Thai',"Helvetica Neue",Arial;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2));
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.card{
+  width:100%;
+  max-width:420px;
+  background:rgba(255, 255, 255, 0.2);
+  border:2px dashed rgba(255,255,255,0.8);
+  border-radius:18px;
+  padding:28px 20px;
+  text-align:center;
+  box-shadow:none;
+}
+h1{
+  margin:0 0 8px 0;
+  font-size:28px;
+  letter-spacing:0.4px;
+  color:#000;
+}
+.subtitle{margin:0 0 15px 0;color:#000}
+.hero{font-size:24px;margin:0 0 6px 0;font-weight:700;color:#000}
+.btn{
+  background:linear-gradient(90deg,var(--accent),#ff9fb1);
+  border:0;
+  color:white;
+  padding:12px 18px;
+  font-size:16px;
+  border-radius:999px;
+  box-shadow:0 6px 18px rgba(255,107,129,0.28);
+}
+.btn:active{transform:translateY(1px)}
+.hidden{display:none}
+.message{margin:18px 0 6px 0;font-weight:600}
+.hearts{position:relative;height:140px;overflow:hidden}
+
+.photo-frame{
+  width:88%;
+  max-width:360px;
+  margin:16px auto 6px auto;
+  padding:8px;
+  background:rgba(255,255,255,0.6);
+  border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  border:4px solid rgba(255,255,255,0.85);
+}
+.portrait{display:block;width:100%;height:auto;border-radius:10px;object-fit:cover}
+
+/* giphy behind emoji - place inline so it doesn't overlap text */
+.giphy-wrap{position:relative;display:inline-flex;align-items:center;gap:8px;vertical-align:middle}
+.giphy-emoji{position:relative;z-index:2;display:inline-block}
+.giphy-behind{display:inline-block;width:72px;height:100px;pointer-events:none;opacity:0.95;border-radius:8px;object-fit:cover;margin:0 auto}
+
+.giphy-row{text-align:center;margin-top:auto;margin-bottom:-20px;position:relative;z-index:5}
+
+/* clickable photo hearts */
+.photo-frame{position:relative}
+.photo-hearts{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.photo-hearts .heart{position:absolute;width:16px;height:16px;transform:rotate(-45deg);background:linear-gradient(180deg,#ff6b81,#ff9fb1);opacity:0.95;border-radius:2px;animation:photoFloatUp 2000ms linear forwards}
+.photo-hearts .heart::before,.photo-hearts .heart::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:inherit}
+.photo-hearts .heart::before{top:-8px;left:0}
+.photo-hearts .heart::after{left:8px;top:0}
+@keyframes photoFloatUp{
+  0%{transform:translateY(0) scale(0.8) rotate(-45deg);opacity:1}
+  100%{transform:translateY(-120px) scale(1) rotate(-45deg);opacity:0}
+}
+
+.portrait{cursor:pointer}
+
+@media (max-width:450px){
+  .giphy-behind{width:56px;height:56px}
+}
+
+@media (max-width:360px){
+  .giphy-behind{width:48px;height:48px}
+}
+.heart{
+  position:absolute;
+  width:18px;height:18px;
+  transform:rotate(-45deg);
+  background:linear-gradient(180deg,#ff6b81,#ff9fb1);
+  left:50%;
+  top:50%;
+  opacity:0.95;
+  animation:floatUp 3000ms linear forwards;
+}
+.heart::before,.heart::after{
+  content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:inherit
+}
+.heart::before{top:-9px;left:0}
+.heart::after{left:9px;top:0}
+@keyframes floatUp{
+  0%{transform:translate(-50%,0) scale(0.7) rotate(-45deg);opacity:1}
+  100%{transform:translate(-50%,-220px) scale(1) rotate(-45deg);opacity:0}
+}
+/* confetti canvas sits full screen but pointer-events none */
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:10}
+
+/* Larger screens: keep center card */
+@media (min-width:640px){
+  .card{padding:36px}
+  h1{font-size:34px}
+}
