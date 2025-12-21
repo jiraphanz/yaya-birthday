@@ -160,7 +160,7 @@
       mouse.y = -(clientY / window.innerHeight) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects([boxBody, lid]);
+      const intersects = raycaster.intersectObjects([boxBody, lidPivot], true);
 
       if (intersects.length > 0 && !isOpen) {
         openBox();
