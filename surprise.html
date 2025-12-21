@@ -21,14 +21,24 @@
     
     #canvas { display: block; }
     
-    #hint {
+    #open-btn {
       position: absolute;
       bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.75);
       color: white;
-      font-size: 32px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      border: 2px solid white;
+      padding: 12px 20px;
+      border-radius: 28px;
+      cursor: pointer;
+      font-family: "Kanit", sans-serif;
+      font-size: 28px;
+      z-index: 20;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
       animation: pulse 1.5s infinite;
     }
+    #open-btn:hover { background: rgba(0,0,0,0.9); }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
     
     #back-btn {
@@ -61,7 +71,7 @@
 </head>
 <body>
   <button id="back-btn">← กลับ</button>
-  <div id="hint">เปิดกล่องสิ!🎁</div>
+  <button id="open-btn" aria-label="เปิดกล่อง">เปิดกล่องสิ! 🎁</button>
 
   <!-- Three.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
@@ -169,6 +179,8 @@
 
     function openBox() {
       isOpen = true;
+      const btn = document.getElementById('open-btn');
+      if (btn) btn.style.display = 'none';
       targetRotation = -Math.PI * 0.7;  // Open angle
 
       // Spawn particles
@@ -286,6 +298,11 @@
     // Events
     window.addEventListener('click', onClick);
     window.addEventListener('touchstart', onClick, { passive: false });
+    
+    // Explicit open button handlers (mobile-friendly)
+    const openBtn = document.getElementById('open-btn');
+    openBtn.addEventListener('click', (e) => { e.stopPropagation(); if (!isOpen) openBox(); });
+    openBtn.addEventListener('touchstart', (e) => { e.preventDefault(); e.stopPropagation(); if (!isOpen) openBox(); });
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
