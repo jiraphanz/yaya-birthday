@@ -34,7 +34,6 @@ body{
 
 .bg-heart {
   position:absolute;
-  opacity:0.12;
 }
 
 .bg-heart::before {
@@ -42,54 +41,36 @@ body{
   display:block;
 }
 
-@keyframes floatAcross1 {
-  0% {
-    transform:translateX(-100px) translateY(0) rotate(0deg) scale(0.8);
+@keyframes fadeInOut1 {
+  0%, 100% {
     opacity:0;
+    transform:scale(0.8);
   }
-  5% {
-    opacity:0.12;
-  }
-  95% {
-    opacity:0.12;
-  }
-  100% {
-    transform:translateX(calc(100vw + 100px)) translateY(-80px) rotate(25deg) scale(1.1);
-    opacity:0;
+  50% {
+    opacity:0.2;
+    transform:scale(1);
   }
 }
 
-@keyframes floatAcross2 {
-  0% {
-    transform:translateX(-120px) translateY(0) rotate(0deg) scale(0.9);
+@keyframes fadeInOut2 {
+  0%, 100% {
     opacity:0;
+    transform:scale(0.7) rotate(10deg);
   }
-  5% {
-    opacity:0.12;
-  }
-  95% {
-    opacity:0.12;
-  }
-  100% {
-    transform:translateX(calc(100vw + 120px)) translateY(60px) rotate(-20deg) scale(1);
-    opacity:0;
+  50% {
+    opacity:0.18;
+    transform:scale(1.1) rotate(-10deg);
   }
 }
 
-@keyframes floatAcross3 {
-  0% {
-    transform:translateX(-80px) translateY(0) rotate(0deg) scale(1);
+@keyframes fadeInOut3 {
+  0%, 100% {
     opacity:0;
+    transform:scale(0.9) rotate(-5deg);
   }
-  5% {
-    opacity:0.12;
-  }
-  95% {
-    opacity:0.12;
-  }
-  100% {
-    transform:translateX(calc(100vw + 80px)) translateY(-30px) rotate(15deg) scale(0.85);
-    opacity:0;
+  50% {
+    opacity:0.15;
+    transform:scale(1) rotate(5deg);
   }
 }
 .card{

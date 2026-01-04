@@ -6,40 +6,31 @@ const ctx = canvas.getContext && canvas.getContext('2d');
 let confettiPieces = [];
 let portraitClickCount = 0;
 
-// Background floating hearts
+// Background fading hearts
 const bgHeartsContainer = document.getElementById('bgHearts');
 function createBgHearts() {
-  const numberOfHearts = 25; // เพิ่มจำนวนหัวใจ
-  const animations = ['floatAcross1', 'floatAcross2', 'floatAcross3'];
+  const numberOfHearts = 30; // เพิ่มจำนวนหัวใจเพราะผลุบโผล่
+  const animations = ['fadeInOut1', 'fadeInOut2', 'fadeInOut3'];
   
   for (let i = 0; i < numberOfHearts; i++) {
     const heart = document.createElement('div');
     heart.className = 'bg-heart';
     
-    // ให้บางดวงวิ่งตรงกลางจอ (45-55%) ตรงส่วนของ card
-    if (i % 3 === 0) {
-      // หัวใจที่วิ่งตรงกลางจอ
-      heart.style.top = `${45 + Math.random() * 10}%`;
-    } else {
-      // หัวใจที่กระจายทั่วหน้าจอ
-      heart.style.top = `${Math.random() * 100}%`;
-    }
-    
-    // ให้บางดวงเริ่มจากตรงกลางจอ (30-70%) ไม่ต้องรอวิ่งมาจากซ้าย
-    if (i % 4 === 0) {
-      heart.style.left = `${30 + Math.random() * 40}%`;
-    }
+    // กระจายตำแหน่งทั่วหน้าจอ
+    heart.style.left = `${Math.random() * 100}%`;
+    heart.style.top = `${Math.random() * 100}%`;
     
     // ขนาดที่หลากหลาย
-    const size = 35 + Math.random() * 55; // 35-90px
+    const size = 30 + Math.random() * 70; // 30-100px
     heart.style.fontSize = `${size}px`;
     
     // เลือก animation แบบสุ่ม
     const animationType = animations[Math.floor(Math.random() * animations.length)];
-    heart.style.animation = `${animationType} ${12 + Math.random() * 18}s linear infinite`;
+    const duration = 3 + Math.random() * 4; // 3-7 วินาที
+    heart.style.animation = `${animationType} ${duration}s ease-in-out infinite`;
     
-    // delay แบบสุ่มเพื่อให้ไม่เริ่มพร้อมกัน
-    heart.style.animationDelay = `${Math.random() * 20}s`;
+    // delay แบบสุ่มเพื่อให้ผลุบโผล่ไม่พร้อมกัน
+    heart.style.animationDelay = `${Math.random() * 5}s`;
     
     bgHeartsContainer.appendChild(heart);
   }
