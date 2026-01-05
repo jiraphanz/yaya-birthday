@@ -6,37 +6,6 @@ const ctx = canvas.getContext && canvas.getContext('2d');
 let confettiPieces = [];
 let portraitClickCount = 0;
 
-// Background fading hearts
-const bgHeartsContainer = document.getElementById('bgHearts');
-function createBgHearts() {
-  const numberOfHearts = 30; // เพิ่มจำนวนหัวใจเพราะผลุบโผล่
-  const animations = ['fadeInOut1', 'fadeInOut2', 'fadeInOut3'];
-  
-  for (let i = 0; i < numberOfHearts; i++) {
-    const heart = document.createElement('div');
-    heart.className = 'bg-heart';
-    
-    // กระจายตำแหน่งทั่วหน้าจอ
-    heart.style.left = `${Math.random() * 100}%`;
-    heart.style.top = `${Math.random() * 100}%`;
-    
-    // ขนาดที่หลากหลาย
-    const size = 30 + Math.random() * 70; // 30-100px
-    heart.style.fontSize = `${size}px`;
-    
-    // เลือก animation แบบสุ่ม
-    const animationType = animations[Math.floor(Math.random() * animations.length)];
-    const duration = 3 + Math.random() * 4; // 3-7 วินาที
-    heart.style.animation = `${animationType} ${duration}s ease-in-out infinite`;
-    
-    // delay แบบสุ่มเพื่อให้ผลุบโผล่ไม่พร้อมกัน
-    heart.style.animationDelay = `${Math.random() * 5}s`;
-    
-    bgHeartsContainer.appendChild(heart);
-  }
-}
-createBgHearts();
-
 function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
